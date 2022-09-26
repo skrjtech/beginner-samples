@@ -22,12 +22,24 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 """
 -> expected_conditions:
-    -> visibility_of_element_located	    指定した要素の表示される
-    -> text_to_be_present_in_element	    指定したテキストが表示される
-    -> presence_of_all_elements_located	    ページ内のすべての要素が読み込まれる
-    -> presence_of_element_located	        DOM要素内に指定した要素が現れる
-    -> alert_is_present	                    Alertが表示される
-    -> element_to_be_clickable	            要素がクリック出来る状態になる
+    -> visibility_of_element_located	            指定した要素の表示される
+    -> text_to_be_present_in_element	            指定したテキストが表示される
+    -> presence_of_all_elements_located	            ページ内のすべての要素が読み込まれる
+    -> presence_of_element_located	                DOM要素内に指定した要素が現れる
+    -> alert_is_present	                            Alertが表示される
+    -> element_to_be_clickable	                    要素がクリック出来る状態になる
+
+    -> title_is
+    -> title_contains
+    -> visibility_of
+    -> text_to_be_present_in_element_value
+    -> frame_to_be_available_and_switch_to_it
+    -> invisibility_of_element_located
+    -> staleness_of
+    -> element_to_be_selected
+    -> element_located_to_be_selected
+    -> element_selection_state_to_be
+    -> element_located_selection_state_to_be
 """
 
 options = webdriver.ChromeOptions()
