@@ -197,4 +197,3 @@ driver.delete_all_cookies()
 ```
 driver.navigate("file:///index.html")
 ```
-」
