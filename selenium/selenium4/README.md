@@ -1,39 +1,40 @@
-# Selenium4 学習用
-[![Selenium Docs](http://www.w3.org/2000/svg)](https://www.selenium.dev/ja/documentation/overview/components)
-## Selenium4 Install
-### conda
-```
-conda install -c conda-forge selenium
-```
-### pip
+# Selenium4 Docs
+詳しいことはリンク先から [![Selenium Docs](http://www.w3.org/2000/svg)](https://www.selenium.dev/ja/documentation/overview/components) 
+
+# Selenium4 Install
+## pip
 ```
 pip install selenium
 ```
-### Source
+## conda
+```
+conda install -c conda-forge selenium
+```
+## source
 ```
 git clone https://github.com/SeleniumHQ/selenium.git
 cd selenium/py
 python setup.py install
 ```
-## Selenium4 へのアップグレード
-### python 3.7 <= 3.X
+# Selenium4 アップグレード
+## python 3.7 <= 3.X
 ```
 pip install selenium==4.4.3
 ```
-# 単純な操作
-## ウェブドライバー
+# Selenium4 Usage
+## WebDriver Import
 ```
 from selenium import webdriver
 
-driver = webdriver.Chrome()
+Driver = webdriver.Chrome()
 
-driver.get("http://selenium.dev")
+Driver.get("http://selenium.dev")
 
-driver.quit()
+Driver.quit()
 ```
-## ドライバーのインストール
+# Selenium4 Web Driver Install 
 様々なドライバーに適したサンプル: [Webdriver Manager for Python](https://github.com/SergeyPirogov/webdriver_manager)
-### webdriver-managerのインストール
+## WebDriver Manager Install
 ```
 pip install webdriver-manager
 ```
@@ -43,11 +44,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 
 service = Service(executable_path=ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service)
+Driver = webdriver.Chrome(service=service)
 
-driver.quit()
+Driver.quit()
 ```
-### 手動でウェブドライバーのインストール
+## 手動でウェブドライバーのインストール
 |Browser|Supported OS|Maintained by|Download|Issue Tracker|
 |:---|:---|:---|:---|:---|
 |Chromium/Chrome|Windows / macOS / Linux|Google|[Downloads](https://chromedriver.chromium.org/downloads)|[Issues](https://bugs.chromium.org/p/chromedriver/issues/list)|
@@ -67,133 +68,136 @@ unzip chromedriver_linux64.zip
 # PATH 追加
 export PATH=$PATH:/opt/WebDriver/bin >> ~/.profile
 ```
-### フルパスでWebDriverの指定 (Chromium/Chrome)
+## フルパスでWebDriver指定 (Chromium/Chrome)
 ```
 from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
 
 service = Service(executable_path="/opt/WebDriver/bin/chromedriver")
-driver = webdriver.Chrome(service=service)
+Driver = webdriver.Chrome(service=service)
 
-driver.quit()
+Driver.quit()
 ```
-# 初歩的な使い方
-## セッションの起動
+## Import Driver
 ```
 from time import sleep as Sleep
 from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
 
 service = Service(executable_path="/opt/WebDriver/bin/chromedriver")
-driver = webdriver.Chrome(service=service)
+Driver = webdriver.Chrome(service=service)
 
-driver.quit()
+Driver.quit()
 ```
-## 情報の取得
+## リンク検索
 ```
-driver.get("https://www.google.com")
+Driver.get("https://www.google.com")
 ```
-## タイトルの取得
+## リンク先のタイトル取得
 ```
-title = driver.title
+title = Driver.title
 ```
-## 要素が見つかるまで待機
-### implicitly_wait
+## 暗黙的な待機 
 ```
-driver.implicitly_wait(0.5) # 0.5秒待機
+Driver.implicitly_wait(0.5) # 0.5秒待機
 ```
 ## 要素の検索
 ```
 from selenium.webdriver.common.by import By
 
-text_box = driver.find_element(by=By.NAME, value="val")
-submit_button = driver.find_element(by=By.CSS_SELECTOR, value="val")
+text_box = Driver.find_element(by=By.NAME, value="val")
+submit_button = Driver.find_element(by=By.CSS_SELECTOR, value="val")
 ```
-
+## 値入力
+```
+text_box.send_keys("val")
+```
 ## クリック
 ```
-# 検索した要素の中に、例えばユーザー名を入力するテキストボックスに入力を送信する事ができる
-text_box.send_keys("val")
 submit_button.click()
 ```
-## 取得した要素をリクエスト
+## 要素のテキストを取得
+例) HTML
+```
+<p id='message'>Hello World!</p>
+out: Hello World!
+```
 ```
 message = driver.find_element(by=By.ID, value="message")
-value = message.text
+value = message.text # <- Hello World!
 ```
 ## 終了動作
 ```
-driver.quit()
+Driver.quit()
 ```
 # ブラウザーナビゲーション
-## ナビゲート
 ```
-driver.get("https://www.google.com")
+Driver.get("https://www.google.com")
 ```
-## 戻る動作
+## 前ページ移動
 ```
-driver.back()
+Driver.back()
 ```
-## 移行動作
+## 次ページ移動 ？
 ```
-driver.navigate().forward();
+Driver.navigate().forward();
 ```
-## 更新動作
+## ページの更新
 ```
-driver.refresh()
+Driver.refresh()
 ```
-# Cookiesの使用方法
-## Cookieの追加
-```
-from selenium import webdriver
-
-driver = webdriver.Chrome()
-driver.get("http://www.example.com")
-driver.add_cookie({"name": "key", "value": "value"})
-```
-## 追加したCookieの取得
+# Cookies Usage
+## Cookie Add
 ```
 from selenium import webdriver
 
-driver = webdriver.Chrome()
-driver.get("http://www.example.com")
-driver.add_cookie({"name": "foo", "value": "bar"})
-print(driver.get_cookie("foo"))
+Driver = webdriver.Chrome()
+Driver.get("http://www.example.com")
+Driver.add_cookie({"name": "key", "value": "value"})
 ```
-## Cookieの全情報の取得
+## Get Cookie
+```
+from selenium import webdriver
+
+Driver = webdriver.Chrome()
+Driver.get("http://www.example.com")
+Driver.add_cookie({"name": "foo", "value": "bar"})
+print(Driver.get_cookie("foo"))
+```
+## Get Cookies
 ```
 from selenium import webdriver
 
-driver = webdriver.Chrome()
-driver.get("http://www.example.com")
-driver.add_cookie({"name": "test1", "value": "cookie1"})
-driver.add_cookie({"name": "test2", "value": "cookie2"})
-print(driver.get_cookies())
+Driver = webdriver.Chrome()
+Driver.get("http://www.example.com")
+Driver.add_cookie({"name": "test1", "value": "cookie1"})
+Driver.add_cookie({"name": "test2", "value": "cookie2"})
+print(Driver.get_cookies())
 ```
-## Cookiesの削除
-```
-from selenium import webdriver
-driver = webdriver.Chrome()
-
-driver.get("http://www.example.com")
-driver.add_cookie({"name": "test1", "value": "cookie1"})
-driver.add_cookie({"name": "test2", "value": "cookie2"})
-
-driver.delete_cookie("test1")
-```
-## Cookiesの全削除
+## Cookie Delete
 ```
 from selenium import webdriver
-driver = webdriver.Chrome()
+Driver = webdriver.Chrome()
 
-driver.get("http://www.example.com")
-driver.add_cookie({"name": "test1", "value": "cookie1"})
-driver.add_cookie({"name": "test2", "value": "cookie2"})
+Driver.get("http://www.example.com")
+Driver.add_cookie({"name": "test1", "value": "cookie1"})
+Driver.add_cookie({"name": "test2", "value": "cookie2"})
 
-driver.delete_all_cookies()
+Driver.delete_cookie("test1")
+```
+## Cookie All Delete
+```
+from selenium import webdriver
+Driver = webdriver.Chrome()
+
+Driver.get("http://www.example.com")
+Driver.add_cookie({"name": "test1", "value": "cookie1"})
+Driver.add_cookie({"name": "test2", "value": "cookie2"})
+
+Driver.delete_all_cookies()
   
 ```
-# ファイルからの情報取得
+# 保存ファイルから開く
 ```
-driver.navigate("file:///index.html")
+Driver.navigate("file:///index.html")
 ```
