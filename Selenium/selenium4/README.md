@@ -101,7 +101,7 @@ title = Driver.title
 ```
 Driver.implicitly_wait(0.5) # 0.5秒待機
 ```
-明示的・暗黙的な待機については, examples/selenium_wait_or_sleep.py で詳しく解説している
+明示的・暗黙的な待機については, [examples/selenium_wait_or_sleep.py](./examples/selenium_wait_or_sleep.py) で詳しく解説している
 ## 要素の検索
 ```
 from selenium.webdriver.common.by import By
